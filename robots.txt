@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wecareseniorhome.com/sitemap.xml
