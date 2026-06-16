@@ -752,7 +752,7 @@
 
   // form -> Formspree (async, with status feedback + mailto fallback)
   var form = document.getElementById('careForm');
-  var status = document.getElementById('formStatus');
+  var statusEl = document.getElementById('formStatus');
   var btn = form.querySelector('button[type=submit]');
   var btnLabel = btn.textContent;
 
@@ -775,8 +775,8 @@
     }
     btn.disabled = true;
     btn.textContent = 'Sending…';
-    status.textContent = '';
-    status.style.color = '#cfe0d4';
+    statusEl.textContent = '';
+    statusEl.style.color = '#cfe0d4';
 
     // 15-second timeout so the button can never hang forever
     var ctrl = new AbortController();
@@ -791,13 +791,13 @@
       clearTimeout(timer);
       if (!res.ok) throw new Error('http_' + res.status);
       form.reset();
-      status.textContent = 'Thank you — we received your message and will be in touch shortly.';
+      statusEl.textContent = 'Thank you — we received your message and will be in touch shortly.';
       btn.textContent = 'Sent ✓';
     }).catch(function(err){
       clearTimeout(timer);
       console.error('[careForm]', err);
-      status.style.color = '#ffd1c4';
-      status.innerHTML = 'Something went wrong sending your message. Please call <a href="tel:+14043174137" style="color:#fff;font-weight:700">(404) 317-4137</a> or email <a href="mailto:seniorcarewecare@gmail.com" style="color:#fff;font-weight:700">seniorcarewecare@gmail.com</a>.';
+      statusEl.style.color = '#ffd1c4';
+      statusEl.innerHTML = 'Something went wrong sending your message. Please call <a href="tel:+14043174137" style="color:#fff;font-weight:700">(404) 317-4137</a> or email <a href="mailto:seniorcarewecare@gmail.com" style="color:#fff;font-weight:700">seniorcarewecare@gmail.com</a>.';
       btn.disabled = false;
       btn.textContent = btnLabel;
     });
