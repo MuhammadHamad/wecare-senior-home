@@ -17,19 +17,21 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180x180.png">
-<meta name="theme-color" content="#2f5d4e">
+<meta name="theme-color" content="#1a4282">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1c2a23; --ink-soft:#41534a;
-    --green:#2f5d4e; --green-deep:#234738;
-    --sage:#e3ebe2; --sage-line:#c7d6c8;
-    --honey:#dd9a3c; --honey-deep:#c8852a;
-    --paper:#fbf8f1; --paper-warm:#f4ede0; --blush:#f1e4d6; --white:#fff;
-    --shadow:0 18px 50px -28px rgba(35,71,56,.45);
-    --shadow-soft:0 10px 30px -20px rgba(35,71,56,.4);
+    /* ---- Cohesive brand system: navy primary · green secondary · gold accent ---- */
+    --ink:#13243d; --ink-soft:#4a5d76;
+    --green:#1a4282; --green-deep:#102c5a;            /* primary — navy */
+    --green-secondary:#2f6e54; --green-secondary-deep:#214c3a; /* secondary — green */
+    --honey:#d2a23f; --honey-deep:#b3842b;            /* accent — gold (sparing) */
+    --sage:#e9f0f9; --sage-line:#cfddef;              /* cool neutral surfaces + borders */
+    --paper:#f6f9fc; --paper-warm:#eef3fa; --blush:#e7eef8; --white:#fff;
+    --shadow:0 18px 50px -28px rgba(16,44,90,.40);
+    --shadow-soft:0 10px 30px -20px rgba(16,44,90,.30);
     --r:28px; --maxw:1140px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -47,12 +49,12 @@
   /* ---------- ambient background art (fills side margins) ---------- */
   .ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
     background:
-      radial-gradient(900px 520px at 50% -10%, rgba(221,154,60,.10), transparent 60%),
-      radial-gradient(700px 500px at 100% 30%, rgba(47,93,78,.07), transparent 55%),
-      radial-gradient(700px 500px at 0% 70%, rgba(47,93,78,.06), transparent 55%),
+      radial-gradient(900px 520px at 50% -10%, rgba(26,66,130,.08), transparent 60%),
+      radial-gradient(700px 500px at 100% 30%, rgba(47,110,84,.06), transparent 55%),
+      radial-gradient(700px 500px at 0% 70%, rgba(26,66,130,.05), transparent 55%),
       var(--paper);
   }
-  .branch{position:absolute;top:80px;width:230px;opacity:.5;color:var(--green)}
+  .branch{position:absolute;top:80px;width:230px;opacity:.5;color:var(--green-secondary)}
   .branch.left{left:-30px;transform:scaleX(-1)}
   .branch.right{right:-30px}
   .branch.b2{top:auto;bottom:60px;opacity:.4;color:var(--honey-deep)}
@@ -63,21 +65,23 @@
     font-family:"Nunito Sans",sans-serif;font-weight:700;font-size:1.02rem;padding:16px 28px;border-radius:999px;
     text-decoration:none;cursor:pointer;border:2px solid transparent;min-height:54px;
     transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
-  .btn-primary{background:var(--honey);color:#2a1c06;box-shadow:var(--shadow-soft)}
-  .btn-primary:hover{background:var(--honey-deep);transform:translateY(-2px)}
-  .btn-green{background:var(--green);color:#fff}
-  .btn-green:hover{background:var(--green-deep);transform:translateY(-2px)}
-  .btn-ghost{background:rgba(255,255,255,.7);color:var(--green);border-color:var(--sage-line)}
-  .btn-ghost:hover{background:var(--sage);transform:translateY(-2px)}
+  .btn-primary{background:var(--green);color:#fff;box-shadow:var(--shadow-soft)}
+  .btn-primary:hover{background:var(--green-deep);transform:translateY(-2px)}
+  .btn-green{background:var(--green-secondary);color:#fff}
+  .btn-green:hover{background:var(--green-secondary-deep);transform:translateY(-2px)}
+  .btn-ghost{background:var(--white);color:var(--green);border-color:var(--sage-line)}
+  .btn-ghost:hover{background:var(--sage);border-color:var(--green);transform:translateY(-2px)}
+  .btn-light{background:#fff;color:var(--green-secondary-deep)}
+  .btn-light:hover{background:#eef6f1;transform:translateY(-2px)}
   a:focus-visible,button:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 
   /* ---------- header ---------- */
-  header{position:sticky;top:0;z-index:80;background:rgba(251,248,241,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--sage-line)}
+  header{position:sticky;top:0;z-index:80;background:rgba(246,249,252,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--sage-line)}
   .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px clamp(22px,5vw,56px);max-width:var(--maxw);margin:0 auto}
   .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:0 0 auto}
   .brand-mark{width:42px;height:42px;flex:0 0 auto;object-fit:contain}
   .brand-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.12rem;color:var(--green-deep);line-height:1.05;white-space:nowrap}
-  .brand-name span{display:block;font-family:"Nunito Sans",sans-serif;font-weight:600;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--honey-deep)}
+  .brand-name span{display:block;font-family:"Nunito Sans",sans-serif;font-weight:600;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green-secondary)}
   .nav-links{display:flex;align-items:center;gap:24px}
   .nav-links a.lnk{text-decoration:none;font-weight:600;color:var(--ink-soft);font-size:.96rem;white-space:nowrap}
   .nav-links a.lnk:hover{color:var(--green)}
@@ -110,10 +114,10 @@
   /* ---------- hero ---------- */
   .hero{position:relative;overflow:hidden;background:transparent}
   .hero::before{content:"";position:absolute;inset:0;z-index:0;
-    background:radial-gradient(1100px 520px at 78% -8%, rgba(221,154,60,.18), transparent 60%)}
+    background:radial-gradient(1100px 520px at 78% -8%, rgba(26,66,130,.12), transparent 60%)}
   .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;padding-block:70px 78px}
   .hero h1{font-size:clamp(2.5rem,5.2vw,4rem);color:var(--green-deep)}
-  .hero h1 em{font-style:italic;color:var(--honey-deep)}
+  .hero h1 em{font-style:italic;color:var(--green-secondary)}
   .hero p.lead{font-size:1.22rem;color:var(--ink-soft);margin:22px 0 14px;max-width:36ch}
   .hero p.seo{font-size:1rem;color:var(--ink-soft);margin-bottom:26px;max-width:46ch}
   .hero-cta{display:flex;flex-wrap:wrap;gap:14px}
@@ -122,8 +126,8 @@
   .hero-trust b{color:var(--green-deep)}
   .hero-trust .sep{width:1px;height:34px;background:var(--sage-line)}
   .hero-trust small{display:block;color:var(--ink-soft);font-size:.86rem;line-height:1.3}
-  .vessel{position:relative;aspect-ratio:1/1.04;border-radius:50% 50% 46% 46%/56% 56% 44% 44%;background:linear-gradient(160deg,#3a6f5d,#234738);box-shadow:var(--shadow);overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
-  .vessel::after{content:"";position:absolute;top:-30%;left:-10%;width:120%;height:80%;background:radial-gradient(circle at 50% 50%, rgba(255,236,200,.5), transparent 60%);pointer-events:none}
+  .vessel{position:relative;aspect-ratio:1/1.04;border-radius:50% 50% 46% 46%/56% 56% 44% 44%;background:linear-gradient(160deg,#2a5fb0,var(--green-deep));box-shadow:var(--shadow);overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+  .vessel::after{content:"";position:absolute;top:-30%;left:-10%;width:120%;height:80%;background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.42), transparent 60%);pointer-events:none}
   .vessel-photo{width:100%;height:100%;object-fit:cover}
   .vessel-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#dceadf;text-align:center;padding:30px}
   .vessel-placeholder svg{width:88px;height:88px;opacity:.92}
@@ -199,7 +203,7 @@
   .faq{background:var(--white);border:1px solid var(--sage-line);border-radius:18px;overflow:hidden}
   .faq summary{cursor:pointer;list-style:none;padding:20px 24px;font-weight:700;color:var(--green-deep);font-size:1.08rem;display:flex;justify-content:space-between;align-items:center;gap:16px}
   .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";font-family:"Fraunces",serif;font-size:1.5rem;color:var(--honey-deep);transition:transform .2s ease}
+  .faq summary::after{content:"+";font-family:"Fraunces",serif;font-size:1.5rem;color:var(--green);transition:transform .2s ease}
   .faq[open] summary::after{transform:rotate(45deg)}
   .faq .ans{padding:0 24px 22px;color:var(--ink-soft)}
 
@@ -211,9 +215,9 @@
   @media(max-width:860px){.area-grid{grid-template-columns:1fr;gap:30px}}
 
   /* hiring callout */
-  .hiring{background:var(--honey);color:#2a1c06}
-  .hiring-in{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:30px;flex-wrap:wrap}
-  .hiring-in h3{font-size:1.5rem;color:#2a1c06}
+  .hiring{background:linear-gradient(135deg,var(--green-secondary),var(--green-secondary-deep));color:#e7f3ec}
+  .hiring-in{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:34px;flex-wrap:wrap}
+  .hiring-in h3{font-size:1.5rem;color:#fff}
   .hiring-in p{margin-top:4px;font-weight:600}
 
   /* contact */
@@ -236,12 +240,12 @@
   @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:30px}}
 
   /* footer */
-  footer{background:#1a2b22;color:#aebfb3;padding:54px 0 30px;font-size:.95rem}
+  footer{background:#091a33;color:#a8bcd4;padding:54px 0 30px;font-size:.95rem}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
   .foot-grid h4{color:#fff;font-family:"Nunito Sans";font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-  .foot-grid a{color:#aebfb3;text-decoration:none;display:block;margin-bottom:8px}
+  .foot-grid a{color:#a8bcd4;text-decoration:none;display:block;margin-bottom:8px}
   .foot-grid a:hover{color:var(--honey)}
-  .disclaimer{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:22px;font-size:.82rem;color:#8aa093;line-height:1.6}
+  .disclaimer{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:22px;font-size:.82rem;color:#7a97b8;line-height:1.6}
   @media(max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}}
   @media(max-width:460px){.foot-grid{grid-template-columns:1fr}}
 
@@ -273,12 +277,12 @@
   .branch.b2{transform-origin:bottom center;animation-duration:15s}
 
   .svc-ico{transition:transform .25s ease,background .25s ease}
-  .svc:hover .svc-ico{transform:scale(1.09) rotate(-3deg);background:#d4e3d3}
+  .svc:hover .svc-ico{transform:scale(1.09) rotate(-3deg);background:#c0d4f0}
   .nav-links a.lnk{position:relative}
-  .nav-links a.lnk::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--honey);border-radius:2px;transition:right .28s ease}
+  .nav-links a.lnk::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--green);border-radius:2px;transition:right .28s ease}
   .nav-links a.lnk:hover::after{right:0}
   .town{transition:transform .16s ease,background .16s ease}
-  .town:hover{transform:translateY(-2px);background:#d4e3d3}
+  .town:hover{transform:translateY(-2px);background:#c0d4f0}
   .cm{transition:background .18s ease,transform .18s ease}
   .cm:hover{transform:translateY(-2px)}
   .rev{transition:transform .2s ease,box-shadow .2s ease}
@@ -443,6 +447,13 @@
   </div>
 </section>
 
+<!-- ============ CARE IN ACTION ============ -->
+<div style="background:var(--paper-warm);padding:52px 0;border-top:1px solid var(--sage-line);border-bottom:1px solid var(--sage-line)">
+  <div class="wrap reveal">
+    <img src="/assets/medication-care.jpeg" alt="We Care caregiver helping a senior with medication reminders in Gwinnett County, GA" loading="lazy" style="width:100%;border-radius:var(--r);display:block;max-height:500px;object-fit:cover;object-position:center 25%;box-shadow:var(--shadow)">
+  </div>
+</div>
+
 <!-- ============ HOW IT WORKS ============ -->
 <section id="how" class="steps">
   <div class="wrap">
@@ -455,6 +466,13 @@
       <div class="step reveal"><div class="n">2</div><h3>Free consultation</h3><p>We listen, answer your questions, and talk through schedules, preferences, and budget.</p></div>
       <div class="step reveal"><div class="n">3</div><h3>A care plan</h3><p>We build a personalized care plan around their needs, routines, and the things that matter most.</p></div>
       <div class="step reveal"><div class="n">4</div><h3>Care begins</h3><p>A matched caregiver steps in with kindness and consistency, and we keep your family informed.</p></div>
+    </div>
+    <div class="reveal" style="margin-top:52px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:36px;align-items:center">
+      <div>
+        <h3 style="font-family:'Fraunces',serif;font-size:1.5rem;color:var(--green-deep);margin-bottom:14px">Always connected, every step of the way.</h3>
+        <p style="color:var(--ink-soft)">Whether you&rsquo;re nearby or across the country, staying in touch with your loved one&rsquo;s care has never been easier. Our team is always just a call or message away.</p>
+      </div>
+      <img src="/assets/owner-tablet.jpeg" alt="We Care founder staying connected with families through digital care coordination" loading="lazy" style="width:100%;border-radius:var(--r);object-fit:cover;height:340px;object-position:center 15%;box-shadow:var(--shadow-soft)">
     </div>
   </div>
 </section>
@@ -470,16 +488,19 @@
       <p>We don&rsquo;t just provide care. We build relationships, and we treat every senior we serve like family.</p>
       <a class="btn btn-green" href="#contact" style="margin-top:10px">Talk to our team</a>
     </div>
-    <div class="about-card reveal">
-      <h3>Why families choose We Care</h3>
-      <p>A perfect 5.0 rating from the families who know us best.</p>
-      <ul>
-        <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Locally rooted in Gwinnett County</li>
-        <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Caregivers chosen for warmth and reliability</li>
-        <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Care plans tailored to each person</li>
-        <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Clear communication with your family</li>
-        <!-- Owner: once verified, add "Licensed, bonded, and insured" and "Background-checked caregivers" here. Do not publish either claim until it is confirmed true. -->
-      </ul>
+    <div class="reveal" style="display:flex;flex-direction:column;gap:22px">
+      <img src="/assets/hands-logo.jpeg" alt="Caregiver and senior holding We Care logo — compassionate home care in Gwinnett County" loading="lazy" style="width:100%;border-radius:var(--r);object-fit:cover;height:240px;object-position:center">
+      <div class="about-card">
+        <h3>Why families choose We Care</h3>
+        <p>A perfect 5.0 rating from the families who know us best.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Locally rooted in Gwinnett County</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Caregivers chosen for warmth and reliability</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Care plans tailored to each person</li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg> Clear communication with your family</li>
+          <!-- Owner: once verified, add "Licensed, bonded, and insured" and "Background-checked caregivers" here. Do not publish either claim until it is confirmed true. -->
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -492,7 +513,11 @@
       <h2 style="margin-top:14px;color:var(--green-deep);font-size:clamp(2rem,3.6vw,2.6rem)">Meet the people behind We Care</h2>
       <p style="color:var(--ink-soft);margin-top:10px">A small, locally rooted team that treats every client and family with warmth, respect, and the kind of attention you only get from people who truly care.</p>
     </div>
-    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:40px">
+    <figure class="reveal" style="margin:40px 0 22px;background:var(--white);border:1px solid var(--sage-line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-soft)">
+      <img src="/assets/team-group.jpeg" alt="The We Care Senior Home Care team at their Gwinnett County office" loading="lazy" style="display:block;width:100%;height:420px;object-fit:cover;object-position:center 20%">
+      <figcaption style="padding:18px 22px;color:var(--ink-soft);font-size:.95rem">The We Care team — dedicated professionals serving families across Gwinnett County with compassion and heart.</figcaption>
+    </figure>
+    <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">
       <figure style="margin:0;background:var(--white);border:1px solid var(--sage-line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-soft)">
         <img src="/assets/team-1.jpeg" alt="The We Care Senior Home Care caregiving team" loading="lazy" style="display:block;width:100%;height:320px;object-fit:cover">
         <figcaption style="padding:18px 22px;color:var(--ink-soft);font-size:.95rem">Our caregivers — local women dedicated to helping seniors live with comfort and dignity.</figcaption>
@@ -571,19 +596,19 @@
     </div>
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:34px">
       <a href="/articles/signs-your-aging-parent-needs-in-home-care" style="display:flex;flex-direction:column;background:var(--white);border:1px solid var(--sage-line);border-radius:22px;padding:28px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow-soft);transition:transform .18s ease,box-shadow .18s ease">
-        <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--honey-deep);margin-bottom:10px">Family guide · 8 min read</div>
+        <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-secondary);margin-bottom:10px">Family guide · 8 min read</div>
         <h3 style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;color:var(--green-deep);margin-bottom:10px;line-height:1.25">Signs Your Aging Parent Needs In-Home Care</h3>
         <p style="color:var(--ink-soft);font-size:.96rem;margin-bottom:18px;flex-grow:1">Physical, cognitive, emotional, and home safety signs that point to in-home care — and how to start the conversation.</p>
         <span style="color:var(--green);font-weight:700;font-size:.96rem">Read the guide →</span>
       </a>
       <a href="/articles/how-much-does-senior-home-care-cost-georgia" style="display:flex;flex-direction:column;background:var(--white);border:1px solid var(--sage-line);border-radius:22px;padding:28px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow-soft);transition:transform .18s ease,box-shadow .18s ease">
-        <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--honey-deep);margin-bottom:10px">Cost guide · 9 min read</div>
+        <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-secondary);margin-bottom:10px">Cost guide · 9 min read</div>
         <h3 style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;color:var(--green-deep);margin-bottom:10px;line-height:1.25">How Much Does Senior Home Care Cost in Georgia? (2026)</h3>
         <p style="color:var(--ink-soft);font-size:.96rem;margin-bottom:18px;flex-grow:1">What families in Gwinnett County actually pay for non-medical home care, what affects the price, and how to budget honestly.</p>
         <span style="color:var(--green);font-weight:700;font-size:.96rem">Read the guide →</span>
       </a>
       <a href="/articles/" style="display:flex;flex-direction:column;background:var(--sage);border:1px solid var(--sage-line);border-radius:22px;padding:28px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow-soft);transition:transform .18s ease,box-shadow .18s ease">
-        <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--honey-deep);margin-bottom:10px">All resources</div>
+        <div style="font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-secondary);margin-bottom:10px">All resources</div>
         <h3 style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:500;color:var(--green-deep);margin-bottom:10px;line-height:1.25">Browse all articles</h3>
         <p style="color:var(--ink-soft);font-size:.96rem;margin-bottom:18px;flex-grow:1">More family guides on choosing an agency, respite care, and non-medical vs. medical care.</p>
         <span style="color:var(--green);font-weight:700;font-size:.96rem">See all →</span>
@@ -609,7 +634,7 @@
     </div>
     <div class="reveal">
       <div style="background:var(--sage);border-radius:var(--r);padding:38px;text-align:center;border:1px solid var(--sage-line)">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#2f5d4e" stroke-width="1.6" style="margin:0 auto 16px"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.4"/></svg>
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1a4282" stroke-width="1.6" style="margin:0 auto 16px"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10Z"/><circle cx="12" cy="11" r="2.4"/></svg>
         <h3 style="color:var(--green-deep);font-size:1.4rem;margin-bottom:8px">Serving the northeast suburbs</h3>
         <p style="color:var(--ink-soft)">Hours: Mon&ndash;Fri 9am&ndash;5pm · Sat 9:30am&ndash;5pm · Sun closed</p>
       </div>
@@ -624,7 +649,7 @@
       <h3>Now hiring compassionate caregivers</h3>
       <p>Love caring for others? Join a team that treats clients and caregivers like family.</p>
     </div>
-    <a class="btn btn-green" href="mailto:seniorcarewecare@gmail.com?subject=Caregiver%20application">Apply to join our team</a>
+    <a class="btn btn-light" href="mailto:seniorcarewecare@gmail.com?subject=Caregiver%20application">Apply to join our team</a>
   </div>
 </div>
 
