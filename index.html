@@ -256,8 +256,6 @@
   .shot-about{border-radius:var(--r);height:240px}
   .shot-team{height:420px;object-position:center 20%}
   .shot-card{height:300px;object-position:center 30%}
-  /* team-1: pre-composed crop, shown in full (no extra cropping) */
-  .shot-portrait{height:auto}
   @media(max-width:768px){
     /* let the full photo show at its natural aspect so nobody gets cut off */
     .shot-tablet,.shot-about,.shot-team,.shot-card{height:auto}
@@ -527,13 +525,9 @@
       <h2 style="margin-top:14px;color:var(--green-deep);font-size:clamp(2rem,3.6vw,2.6rem)">Meet the people behind We Care</h2>
       <p style="color:var(--ink-soft);margin-top:10px">A small, locally rooted team that treats every client and family with warmth, respect, and the kind of attention you only get from people who truly care.</p>
     </div>
-    <figure class="reveal" style="margin:40px 0 22px;background:var(--white);border:1px solid var(--sage-line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-soft)">
+    <figure class="reveal" style="margin:40px 0 0;background:var(--white);border:1px solid var(--sage-line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-soft)">
       <img src="/assets/team-group.jpeg" alt="The We Care Senior Home Care team at their Gwinnett County office" loading="lazy" class="shot shot-team">
       <figcaption style="padding:18px 22px;color:var(--ink-soft);font-size:.95rem">The We Care team — dedicated professionals serving families across Gwinnett County with compassion and heart.</figcaption>
-    </figure>
-    <figure class="reveal" style="margin:0 auto;max-width:600px;background:var(--white);border:1px solid var(--sage-line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow-soft)">
-      <img src="/assets/team-1.jpeg" alt="We Care Senior Home Care caregivers serving families across Gwinnett County, GA" loading="lazy" class="shot shot-portrait">
-      <figcaption style="padding:18px 22px;color:var(--ink-soft);font-size:.95rem;text-align:center">Our caregivers — local women dedicated to helping seniors live with comfort and dignity.</figcaption>
     </figure>
   </div>
 </section>
