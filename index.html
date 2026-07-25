@@ -687,7 +687,6 @@
           </a>
         </div>
       </div>
-      <!-- Owner: replace the action URL below with your Formspree endpoint. Get one at https://formspree.io (free 50/month). After signup, create a form and paste the endpoint here. -->
       <form id="careForm" action="https://formspree.io/f/mjgdzyqj" method="POST">
         <input type="hidden" name="_subject" value="Care request from wecareseniorhome.com">
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -801,29 +800,14 @@
   }, {threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  // form -> Formspree (async, with status feedback + mailto fallback)
+  // form -> Formspree (async, with status feedback)
   var form = document.getElementById('careForm');
   var statusEl = document.getElementById('formStatus');
   var btn = form.querySelector('button[type=submit]');
   var btnLabel = btn.textContent;
 
-  function mailtoFallback(){
-    var n = encodeURIComponent(document.getElementById('name').value || '');
-    var p = encodeURIComponent(document.getElementById('phone').value || '');
-    var e = encodeURIComponent(document.getElementById('email').value || '');
-    var c = encodeURIComponent(document.getElementById('care').value || '');
-    var m = encodeURIComponent(document.getElementById('msg').value || '');
-    var body = "Name: "+n+"%0D%0APhone: "+p+"%0D%0AEmail: "+e+"%0D%0AWho needs care: "+c+"%0D%0A%0D%0A"+m;
-    window.location.href = "mailto:seniorcarewecare@gmail.com?subject="+encodeURIComponent("Care request from website")+"&body="+body;
-  }
-
   form.addEventListener('submit', function(ev){
     ev.preventDefault();
-    // If endpoint isn't configured yet, fall back to mailto so the site still works.
-    if (form.action.indexOf('REPLACE_WITH_YOUR_FORMSPREE_ID') !== -1) {
-      mailtoFallback();
-      return;
-    }
     btn.disabled = true;
     btn.textContent = 'Sending…';
     statusEl.textContent = '';
@@ -840,15 +824,29 @@
       signal: ctrl.signal
     }).then(function(res){
       clearTimeout(timer);
-      if (!res.ok) throw new Error('http_' + res.status);
-      form.reset();
-      statusEl.textContent = 'Thank you — we received your message and will be in touch shortly.';
-      btn.textContent = 'Sent ✓';
+      if (res.ok) {
+        form.reset();
+        statusEl.textContent = 'Thank you — we received your message and will be in touch shortly.';
+        btn.textContent = 'Sent ✓';
+        return;
+      }
+      // Non-2xx: read Formspree's JSON error body (field validation errors, etc.)
+      return res.json().catch(function(){ return null; }).then(function(data){
+        throw { formspreeData: data };
+      });
     }).catch(function(err){
       clearTimeout(timer);
       console.error('[careForm]', err);
+      var fallback = 'Something went wrong sending your message. Please call <a href="tel:+14043174137" style="color:#fff;font-weight:700">(404) 317-4137</a> or email <a href="mailto:seniorcarewecare@gmail.com" style="color:#fff;font-weight:700">seniorcarewecare@gmail.com</a>.';
+      var data = err && err.formspreeData;
+      var msg = fallback;
+      if (data && Array.isArray(data.errors) && data.errors.length) {
+        msg = data.errors.map(function(e){ return e.message; }).filter(Boolean).join(' ') || fallback;
+      } else if (data && data.error) {
+        msg = data.error;
+      }
       statusEl.style.color = '#ffd1c4';
-      statusEl.innerHTML = 'Something went wrong sending your message. Please call <a href="tel:+14043174137" style="color:#fff;font-weight:700">(404) 317-4137</a> or email <a href="mailto:seniorcarewecare@gmail.com" style="color:#fff;font-weight:700">seniorcarewecare@gmail.com</a>.';
+      statusEl.innerHTML = msg;
       btn.disabled = false;
       btn.textContent = btnLabel;
     });
